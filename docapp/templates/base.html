@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>{% block title %}DocApp{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body { font-family: system-ui, Arial, sans-serif; margin: 2rem; }
+    .container { max-width: 720px; margin: 0 auto; }
+    .messages li { margin: .25rem 0; padding: .5rem .75rem; border-radius: 6px; }
+    .messages .success { background: #e6ffed; }
+    .messages .error { background: #ffe6e6; }
+    
+  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <div class="container">
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html>

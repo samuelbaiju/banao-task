@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Doctor Dashboard{% endblock %}
+
+{% block content %}
+<div class="full-h-screen bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-600 p-6">
+
+  <!-- Header -->
+  <div class="flex flex-col md:flex-row justify-between items-center mb-8 text-white">
+    <h1 class="text-4xl font-extrabold drop-shadow-lg">👨‍⚕️ Doctor Dashboard</h1>
+    <a href="{% url 'logout' %}" 
+       class="mt-4 md:mt-0 bg-red-500 hover:bg-red-600 px-6 py-2 rounded-full text-white font-semibold shadow-lg transition duration-300">
+      Logout
+    </a>
+  </div>
+
+  <!-- Profile Card -->
+  <div class="bg-white rounded-3xl shadow-2xl p-6 md:p-10 grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+    
+    <!-- Profile Picture -->
+    <div class="flex justify-center">
+      {% if user.profile_picture %}
+        <img src="{{ user.profile_picture.url }}" alt="Profile Picture" 
+             class="w-40 h-40 rounded-full border-4 border-purple-400 shadow-xl object-cover">
+      {% else %}
+        <div class="w-40 h-40 rounded-full border-4 border-purple-400 shadow-xl bg-gray-200 flex items-center justify-center text-gray-500">
+          No Photo
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Info Section -->
+    <div class="md:col-span-2">
+      <h2 class="text-3xl font-bold text-gray-800 mb-4">
+        {{ user.first_name }} {{ user.last_name }}
+      </h2>
+      <p class="text-lg text-gray-600 mb-6">Username: {{ user.username }}</p>
+
+      <!-- Info Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <div class="bg-gradient-to-r from-yellow-200 to-yellow-400 p-4 rounded-xl shadow-md">
+          <p class="font-semibold text-gray-800">Email</p>
+          <p class="text-gray-700">{{ user.email }}</p>
+        </div>
+
+        <div class="bg-gradient-to-r from-green-200 to-green-400 p-4 rounded-xl shadow-md">
+          <p class="font-semibold text-gray-800">Role</p>
+          <p class="text-gray-700">{{ user.role|capfirst }}</p>
+        </div>
+
+        <div class="bg-gradient-to-r from-blue-200 to-blue-400 p-4 rounded-xl shadow-md">
+          <p class="font-semibold text-gray-800">Address</p>
+          <p class="text-gray-700">{{ user.address_line1 }}, {{ user.city }}, {{ user.state }} - {{ user.pincode }}</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
